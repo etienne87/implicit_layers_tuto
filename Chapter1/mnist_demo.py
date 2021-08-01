@@ -10,6 +10,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from Chapter1.fixed_point_iteration_torch import TanhFixedPointLayer
 from Chapter1.newton_layer_torch import TanhNewtonLayer
+from Chapter1.newton_implicit_layer_torch import TanhNewtonImplicitLayer
 
 
 def download_mnist(url='https://www.di.ens.fr/~lelarge/MNIST.tar.gz',
@@ -41,7 +42,7 @@ torch.manual_seed(0)
 model = nn.Sequential(nn.Flatten(),
                       nn.Linear(784, 100),
                       #TanhFixedPointLayer(100, max_iter=200),
-                      TanhNewtonLayer(100, max_iter=200),
+                      TanhNewtonImplicitLayer(100, max_iter=200),
                       nn.Linear(100, 10)
                       ).to(device)
 opt = optim.SGD(model.parameters(), lr=1e-1)
